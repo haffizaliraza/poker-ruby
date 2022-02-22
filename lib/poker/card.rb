@@ -24,13 +24,12 @@ class Card
       'A' => 13
     }
     
-    private
 
     def build_card(card)
-        if caed.lengt() == 3
+        if card.length() == 3
             @face = FACE_VALUES[card.slice(0,2)]
             @suit = SUIT_LOOKUP[card[2].upcase]
-        elsif caed.lengt() == 2
+        elsif card.length() == 2
             @face = FACE_VALUES[card[0].upcase]
             @suit = SUIT_LOOKUP[card[1].upcase]
         else
@@ -41,11 +40,16 @@ class Card
 
     public
 
+    def get_card_score(card)
+        return FACE_VALUES[card.face]
+    end
+
     def initialize(card)
         build_card(card)
     end
 
-
-
-
   end
+
+
+
+

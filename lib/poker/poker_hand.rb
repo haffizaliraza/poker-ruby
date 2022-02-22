@@ -15,10 +15,10 @@ class PokerHand
 
     private
 
-    def build_card(cards)
-        if cards.is_a? Array cards.length() == 5
+    def build_cards(cards)
+        if (cards.is_a? Array) and cards.length() == 5
             @cards = cards.map do  |c| 
-                Card.new(card.to_s)
+                Card.new(c.to_s)
             end
         else
             @cards = []
@@ -26,9 +26,11 @@ class PokerHand
     end
 
     def royal_flush?
+        return false
     end
 
     def straight_flush?
+        return false
     end
 
     def four_of_a_kind?
@@ -52,19 +54,30 @@ class PokerHand
     def pair?
     end
 
+
     def highest_card?
+        begin
+            high_card = @cards.max_by { |c|  get_card_score(c) }
+            return [high_card, get_card_score(high_card)]
+        rescue => exception
+            return false
+        end
     end
 
     public
 
     def initialize(cards)
-        build_cards(card)
+        build_cards(cards)
     end
 
-    def check_rank(cards)
-
+    def check_rank()
+        ACTIONS.map{ |ac| 
+            (method(ac[1]).call)? ac[0] : false
+        }.find { |v| v }
     end
-
-
 
 end
+
+
+hand1 = PokerHand.new(['2D', 'AD', 'AH', '10S', '5C'])
+hand1.check_rank()
