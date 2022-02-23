@@ -45,22 +45,32 @@ class PokerHand
     end
 
     def straight?
+        
     end
 
     def three_of_a_kind?
+        hash = Hash.new(0)
+        @cards.map{ |c| hash[c.face] += 1 }
+        return hash.key(2) ? hash.key(3) : false
     end
 
     def two_pair?
+        hash = Hash.new(0)
+        @cards.map{ |c| hash[c.face] += 1 }
+        return (hash.select{|k, v| v ==  2}.keys.length() == 2) ? hash.select{|k, v| v ==  2}.keys : false
     end
 
     def pair?
+        hash = Hash.new(0)
+        @cards.map{ |c| hash[c.face] += 1 }
+        return hash.key(2) ? hash.key(2) : false
     end
 
 
     def highest_card?
         begin
             high_card = @cards.max_by { |c|  c.face }
-            return [high_card, high_card.face ]
+            return high_card.face
         rescue => exception
             return false
         end
@@ -81,4 +91,5 @@ end
 
 
 hand1 = PokerHand.new(['2D', 'AD', 'AH', '10S', '5C'])
+hand2 = PokerHand.new(['2D', 'AD', 'AH', '2S', '5C'])
 hand1.check_rank()
