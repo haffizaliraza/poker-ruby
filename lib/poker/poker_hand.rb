@@ -67,7 +67,6 @@ class PokerHand
     end
 
     
-
     def initialize(cards)
         build_cards(cards)
     end
