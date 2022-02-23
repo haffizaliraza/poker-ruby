@@ -30,9 +30,7 @@ class PokerHand
     end
 
     def straight_flush?
-        hash = Hash.new(0)
-        @cards.map{ |c| hash[c.suit] += 1 }
-        return (hash.key(5) and @cards.map{|c| c.face  }.sort().each_cons(2).all? { |x,y| y == x + 1 }) 
+        return (flush? and straight?)
     end
 
     def four_of_a_kind?
@@ -44,7 +42,7 @@ class PokerHand
     def full_house?
         hash = Hash.new(0)
         @cards.map{ |c| hash[c.face] += 1 }
-        return (hash.key(3) && hash.key(3)) ? true : false
+        return (hash.key2) && hash.key(3)) ? true : false
     end
 
     def flush?
