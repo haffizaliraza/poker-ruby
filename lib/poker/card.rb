@@ -1,4 +1,5 @@
 class Card
+    attr_accessor :face, :suit
     SUITS = ['c', 'd', 'h', 's']
     FACES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
     SUIT_LOOKUP = {
@@ -40,8 +41,8 @@ class Card
 
     public
 
-    def get_card_score(card)
-        return FACE_VALUES[card.face]
+    def get_card_score()
+        return FACE_VALUES[@face]
     end
 
     def initialize(card)

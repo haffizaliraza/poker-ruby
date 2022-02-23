@@ -1,5 +1,7 @@
 class PokerHand
 
+    attr_reader :cards
+
     ACTIONS = [
         ['Royal Flush',     :royal_flush? ],
         ['Straight Flush',  :straight_flush? ],
@@ -13,7 +15,7 @@ class PokerHand
         ['Highest Card',    :highest_card? ]
       ]
 
-    private
+    
 
     def build_cards(cards)
         if (cards.is_a? Array) and cards.length() == 5
@@ -57,14 +59,14 @@ class PokerHand
 
     def highest_card?
         begin
-            high_card = @cards.max_by { |c|  get_card_score(c) }
-            return [high_card, get_card_score(high_card)]
+            high_card = @cards.max_by { |c|  c.face }
+            return [high_card, high_card.face ]
         rescue => exception
             return false
         end
     end
 
-    public
+    
 
     def initialize(cards)
         build_cards(cards)
