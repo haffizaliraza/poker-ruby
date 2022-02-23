@@ -26,11 +26,11 @@ class PokerHand
     end
 
     def royal_flush?
-        return false
+        return (straight_flush?() and [10,11,12,13,14] == @cards.map{|c| c.face }.sort())
     end
 
     def straight_flush?
-        return (flush? and straight?)
+        return (flush?() and straight?())
     end
 
     def four_of_a_kind?
@@ -42,7 +42,7 @@ class PokerHand
     def full_house?
         hash = Hash.new(0)
         @cards.map{ |c| hash[c.face] += 1 }
-        return (hash.key2) && hash.key(3)) ? true : false
+        return (hash.key(2)) && hash.key(3) ? true : false
     end
 
     def flush?
