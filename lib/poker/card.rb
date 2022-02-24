@@ -2,13 +2,13 @@ class Card
     
     attr_accessor :face, :suit
 
-    SUITS = ['c', 'd', 'h', 's']
+    SUITS = ['♣', '♦', '♥', '♠']
     FACES = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
     SUIT_LOOKUP = {
-      'C' => 1,
-      'D' => 2,
-      'H' => 3,
-      'S' => 4
+      '♣' => 1,
+      '♦' => 2,
+      '♥' => 3,
+      '♠' => 4
     }
     FACE_VALUES = {
       '2' =>  2,
@@ -49,6 +49,15 @@ class Card
     def initialize(card)
         build_card(card)
     end
+
+    def get_suit_by_value(value)
+        return SUIT_LOOKUP.key(value)
+    end
+
+    def get_face_by_value(value)
+        return FACE_VALUES.key(value)
+    end
+
 
   end
 

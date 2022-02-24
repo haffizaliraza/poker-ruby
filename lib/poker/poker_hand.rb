@@ -14,7 +14,7 @@ class PokerHand
         ['Pair',            :pair? ],
         ['Highest Card',    :highest_card? ]
     ]
-    
+
     def build_cards(cards)
         if (cards.is_a? Array) and cards.length() == 5
             @cards = cards.map do  |c| 
@@ -94,19 +94,13 @@ class PokerHand
         }.find { |v| v }
     end
 
+    def check_all_cards()
+        cards_list = []
+        for card in @cards do
+            cards_list.append( card.get_suit_by_value(card.suit) + card.get_face_by_value(card.face) )
+        end
+        return cards_list
+    end
+
 end
 
-
-hand1 = PokerHand.new(['2D', 'AD', 'AH', '10S', '5C'])
-hand2 = PokerHand.new(['2D', 'AD', 'AH', '2S', '5C'])
-hand3 = PokerHand.new(['2D', '2C', '2H', '5S', '5C'])
-hand4 = PokerHand.new(['AD', '5C', '6H', '7S', '9C'])
-hand5 = PokerHand.new(['10D', 'JC', 'QH', 'KS', 'AC'])
-hand6 = PokerHand.new(['10D', 'JD', 'QD', 'KD', 'AD'])
-hand7 = PokerHand.new(['AD', 'AH', 'AS', '2D', '2C'])
-
-
-hand1.check_rank()
-hand2.check_rank()
-hand3.check_rank()
-hand4.check_rank()
