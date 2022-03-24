@@ -20,12 +20,12 @@ while flag do
         hand_list.append(PokerHand.new(list))
     end
 
-    for hand in hand_list do
-        if ["Straight Flush", "Royal Flush", "Four of a kind"].include? hand.check_rank()
-            flag = false
-        end
-        puts hand.check_rank() 
-    end
+#    for hand in hand_list do
+#        if ["Straight Flush", "Royal Flush", "Four of a kind"].include? hand.check_rank()
+#            flag = false
+#        end
+#        puts hand.check_rank() 
+#    end
 
     count += 1
     puts count
