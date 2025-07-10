@@ -1,40 +1,43 @@
-face_values = ['2' ,'3' ,'4' ,'5' ,'6' ,'7' ,'8' ,'9' ,'10' ,'J' ,'Q' ,'K' ,'A' ]
-suit_values =  ['♣', '♦', '♥', '♠']
+# Constants for face values and suit values
+face_values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+suit_values = ['♣', '♦', '♥', '♠']
 
+# Initialize flag and counter
 flag = true
 count = 0
 
-while flag do
-    hand_list = []
-    for hand in 1..4 do
-        list = []
-        for a in 1..5 do
-            while list.length() != 5 do
-                card = face_values.sample + suit_values.sample
-                for h_l in hand_list do 
-                    if !list.include?(card.to_s)
-                        list.append(face_values.sample + suit_values.sample)
-                    end
-            end
-        end
-        hand_list.append(PokerHand.new(list))
+# Main loop to generate hands until a winning condition is met
+while flag
+  hand_list = []
+
+  # Generate 4 hands
+  4.times do
+    hand_cards = Set.new # Use Set to automatically avoid duplicates
+    while hand_cards.length < 5
+      card = face_values.sample + suit_values.sample
+      hand_cards.add(card) # Add card to the set
     end
 
-#    for hand in hand_list do
-#        if ["Straight Flush", "Royal Flush", "Four of a kind"].include? hand.check_rank()
-#            flag = false
-#        end
-#        puts hand.check_rank() 
-#    end
+    # Add the hand to hand_list
+    hand_list.push(PokerHand.new(hand_cards.to_a)) # Convert the Set back to an Array
+  end
 
-    count += 1
-    puts count
+  # Check if any hand has a winning rank
+  hand_list.each do |hand|
+    if ["Straight Flush", "Royal Flush", "Four of a kind"].include? hand.check_rank
+      flag = false # Stop the loop if a winning hand is found
+    end
+    puts hand.check_rank # Print the rank of the hand
+  end
+
+  # Increment the count and print it
+  count += 1
+  puts count
 end
 
-
-for hand in hand_list do 
-    print hand.check_all_cards()
-    print hand.check_rank() 
-    puts ''
-    
+# Print all hands' details
+hand_list.each do |hand|
+  print hand.check_all_cards
+  print hand.check_rank
+  puts ''
 end
